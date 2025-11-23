@@ -9,7 +9,7 @@
 
 **Aplicación Android nativa para generar carteras Bitcoin (Legacy P2PKH) de forma segura y 100% offline**
 
-[Características](#-características) • [Instalación](#-instalación) • [Uso](#-uso) • [Seguridad](#-seguridad) • [Licencia](#-licencia)
+[Características](#-características) • [Instalación](#-instalación) • [Uso](#-uso) • [Seguridad](#-seguridad) • [Arquitectura](#%EF%B8%8F-arquitectura-técnica) • [Licencia](#-licencia)
 
 </div>
 
@@ -20,20 +20,25 @@
 ### 🔐 Seguridad Primero
 - **100% Offline**: Sin conexión a internet, sin servidores externos
 - **Sin Persistencia**: Las claves se generan en RAM y se destruyen al cerrar
+- **Protección de Pantalla**: FLAG_SECURE previene capturas cuando se muestran claves
 - **Código Abierto**: Auditable y verificable por cualquiera
 - **Estándares Bitcoin**: Implementación fiel de SHA-256, RIPEMD-160 y secp256k1
 
 ### ⚡ Funcionalidades
 - ✅ Generación determinista desde texto o archivo
-- ✅ Soporte para imágenes, videos, documentos como semilla
+- ✅ Soporte para imágenes, videos, documentos como semilla (límite 10 MB)
+- ✅ Compresión automática para archivos grandes (>1 MB)
 - ✅ Visualización de Private Key (Hex), WIF, Public Key y Address
 - ✅ Ocultación de claves privadas por defecto
+- ✅ **Botones de copiar** para cada campo con confirmación para datos sensibles
+- ✅ **Protección de pantalla** (FLAG_SECURE) al mostrar claves privadas
 - ✅ Compatible con Electrum y otras wallets estándar
 
 ### 🎨 Diseño Moderno
 - Material Design 3 (Material You)
 - Tema Bitcoin con colores naranja/dorado
 - Interfaz intuitiva y profesional
+- Feedback visual con Snackbars
 - Soporte para modo claro/oscuro
 
 ---
@@ -67,10 +72,17 @@ git clone https://github.com/TU_USUARIO/Generador-Cartera-Bitcoin.git
 ### 2️⃣ Generar desde Archivo
 1. Presiona **"Archivo"**
 2. Selecciona cualquier archivo (imagen, video, documento)
-3. La app calculará el hash SHA-256 del archivo
+   - **Límite**: 10 MB máximo
+   - **Compresión**: Archivos >1 MB se comprimen automáticamente con GZIP
+3. La app procesará el archivo y mostrará información del tamaño
 4. Visualiza tu cartera Bitcoin
 
-### 3️⃣ Importar en Electrum
+### 3️⃣ Copiar Claves
+- **Dirección y Clave Pública**: Copia directa con un clic
+- **Clave Privada y WIF**: Requiere confirmación por seguridad
+- Feedback visual con Snackbar al copiar
+
+### 4️⃣ Importar en Electrum
 
 Las claves generadas son **100% compatibles** con Electrum:
 
@@ -90,6 +102,10 @@ La aplicación sigue el proceso estándar de generación de direcciones Bitcoin:
 
 ```
 Semilla (Texto/Archivo)
+    ↓
+[Procesamiento de Archivo]
+    ├─→ Límite: 10 MB
+    └─→ Compresión GZIP si >1 MB
     ↓
 SHA-256
     ↓
@@ -124,8 +140,19 @@ Clave Privada (256 bits)
 ### ✅ Buenas Prácticas
 - Usa esta app en un dispositivo **sin malware**
 - Genera carteras en un entorno **offline**
-- **Guarda tu semilla** de forma segura (papel, metal)
+- **Guarda tu semilla** de forma segura (papel, metal, USB cifrado)
 - **Nunca compartas** tu clave privada o WIF
+- La app bloquea capturas de pantalla cuando muestras claves privadas
+- Las claves se ocultan automáticamente al cambiar de app
+
+### 🔄 Recuperación de Claves
+
+**IMPORTANTE**: Puedes regenerar tus claves privadas usando la **misma semilla** en esta app.
+
+- ✅ Guarda tu semilla de forma segura
+- ✅ Usa la misma semilla para recuperar tus claves
+- ⚠️ Si alguien más encuentra tu semilla, también puede regenerar tus claves
+- ⚠️ Protege tu semilla como si fuera tu clave privada
 
 ### ⚠️ Descargo de Responsabilidad
 
@@ -157,19 +184,55 @@ Este software se proporciona "tal cual", sin garantía de ningún tipo. Los auto
 ```
 app/
 ├── src/main/java/com/diamon/ganar/
-│   ├── MainActivity.java       # UI y navegación
-│   ├── MainViewModel.java      # Lógica de negocio
-│   └── BitcoinUtils.java       # Criptografía
+│   ├── MainActivity.java           # UI, navegación y listeners
+│   ├── MainViewModel.java          # Lógica de negocio y estado
+│   ├── BitcoinUtils.java           # Fachada criptográfica (legacy)
+│   ├── utils/
+│   │   ├── CryptoUtils.java        # SHA-256, RIPEMD-160, ECDSA
+│   │   ├── Base58Utils.java        # Codificación Base58Check
+│   │   ├── FileUtils.java          # Procesamiento de archivos
+│   │   ├── ClipboardUtils.java     # Copiar al portapapeles
+│   │   └── SecurityUtils.java      # FLAG_SECURE y limpieza
+│   └── model/
+│       ├── WalletData.java         # Modelo de cartera
+│       └── FileProcessingResult.java # Info de archivo procesado
 ├── src/main/res/
 │   ├── layout/
-│   │   └── activity_main.xml   # Layout principal
+│   │   └── activity_main.xml       # Layout con botones de copiar
 │   ├── values/
-│   │   ├── colors.xml          # Tema Bitcoin
-│   │   └── themes.xml          # Material 3
+│   │   ├── colors.xml              # Tema Bitcoin
+│   │   └── themes.xml              # Material 3
 │   └── drawable/
-│       └── ic_btc_shield.xml   # Logo
-└── build.gradle                # Dependencias
+│       ├── ic_btc_shield.xml       # Logo
+│       ├── ic_copy.xml             # Icono copiar
+│       ├── ic_file.xml             # Icono archivo
+│       ├── ic_compress.xml         # Icono compresión
+│       ├── ic_visibility.xml       # Icono mostrar
+│       └── ic_visibility_off.xml   # Icono ocultar
+└── build.gradle                    # Dependencias
 ```
+
+### Clases Principales
+
+#### `CryptoUtils.java`
+Operaciones criptográficas core:
+- `generatePrivateKey()`: SHA-256 doble
+- `derivePublicKey()`: ECDSA secp256k1
+- `generateAddress()`: SHA-256 + RIPEMD-160 + Base58Check
+- `generateWIF()`: Base58Check con prefijo 0x80
+
+#### `FileUtils.java`
+Procesamiento robusto de archivos:
+- Límite de 10 MB
+- Compresión GZIP automática para archivos >1 MB
+- Detección de tipo MIME
+- Manejo de errores
+
+#### `SecurityUtils.java`
+Seguridad mejorada:
+- `enableScreenshotProtection()`: Activa FLAG_SECURE
+- `disableScreenshotProtection()`: Desactiva FLAG_SECURE
+- `clearSensitiveData()`: Limpieza de memoria
 
 ---
 
