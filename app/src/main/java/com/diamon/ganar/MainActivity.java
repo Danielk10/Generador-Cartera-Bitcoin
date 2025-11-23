@@ -282,25 +282,46 @@ public class MainActivity extends AppCompatActivity {
      * Muestra diálogo "Acerca de" con información de la app.
      */
     private void showAboutDialog() {
-        new MaterialAlertDialogBuilder(this)
+        String message = getString(R.string.dialog_about_msg,
+                "<a href='https://github.com/Danielk10/Generador-Cartera-Bitcoin'>GitHub Repository</a>");
+
+        android.text.Spanned spanned = android.text.Html.fromHtml(message, android.text.Html.FROM_HTML_MODE_LEGACY);
+
+        final androidx.appcompat.app.AlertDialog dialog = new MaterialAlertDialogBuilder(this)
                 .setTitle(getString(R.string.dialog_about_title))
                 .setIcon(R.drawable.ic_btc_shield)
-                .setMessage(
-                        getString(R.string.dialog_about_msg, "https://github.com/Danielk10/Generador-Cartera-Bitcoin"))
+                .setMessage(spanned)
                 .setPositiveButton("Entendido", null)
-                .show();
+                .create();
+
+        dialog.show();
+
+        // Hacer los enlaces clickeables
+        ((android.widget.TextView) dialog.findViewById(android.R.id.message))
+                .setMovementMethod(android.text.method.LinkMovementMethod.getInstance());
     }
 
     /**
      * Muestra diálogo de política de privacidad.
      */
     private void showPrivacyDialog() {
-        new MaterialAlertDialogBuilder(this)
+        String message = getString(R.string.dialog_privacy_msg,
+                "<a href='https://generadorcarterasbitcoin.blogspot.com/'>Privacy Policy Blog</a>");
+
+        android.text.Spanned spanned = android.text.Html.fromHtml(message, android.text.Html.FROM_HTML_MODE_LEGACY);
+
+        final androidx.appcompat.app.AlertDialog dialog = new MaterialAlertDialogBuilder(this)
                 .setTitle(getString(R.string.dialog_privacy_title))
                 .setIcon(R.drawable.ic_btc_shield)
-                .setMessage(getString(R.string.dialog_privacy_msg, "https://generadorcarterasbitcoin.blogspot.com/"))
+                .setMessage(spanned)
                 .setPositiveButton("Aceptar", null)
-                .show();
+                .create();
+
+        dialog.show();
+
+        // Hacer los enlaces clickeables
+        ((android.widget.TextView) dialog.findViewById(android.R.id.message))
+                .setMovementMethod(android.text.method.LinkMovementMethod.getInstance());
     }
 
     @Override
