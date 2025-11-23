@@ -1,0 +1,48 @@
+<resources>
+    <string name="app_name">Bitcoin Wallet Generator</string>
+    
+    <!-- UI Labels -->
+    <string name="generate_new_wallet">Generate New Wallet</string>
+    <string name="enter_seed_or_file">Enter a seed phrase or select a file to generate entropy.</string>
+    <string name="seed_hint">Seed Phrase (Text)</string>
+    <string name="btn_file">File</string>
+    <string name="btn_generate">Generate</string>
+    <string name="btn_clear">Clear Fields</string>
+    <string name="results_secure">Secure Results</string>
+    <string name="btn_show">Show</string>
+    <string name="btn_hide">Hide</string>
+    
+    <!-- Result Labels -->
+    <string name="label_address">BITCOIN ADDRESS (P2PKH)</string>
+    <string name="label_public_key">Public Key (Hex)</string>
+    <string name="label_private_key">⚠️ Private Key (Hex)</string>
+    <string name="label_wif">⚠️ Private Key WIF</string>
+    <string name="warning_text">⚠️ WARNING: Never share your private key or WIF. Anyone with access to them can steal your funds. You can regenerate these keys using the same seed in this app.</string>
+    
+    <!-- Menu -->
+    <string name="menu_privacy">Privacy</string>
+    <string name="menu_about">About</string>
+    
+    <!-- Messages -->
+    <string name="msg_enter_seed">Please enter a seed text</string>
+    <string name="file_info_template">File: %1$s (%2$s)</string>
+    <string name="file_compressed_template">\n✓ Compressed %1$s%% → %2$s</string>
+    
+    <!-- Copy Labels -->
+    <string name="copy_address">Bitcoin Address</string>
+    <string name="copy_public_key">Public Key</string>
+    <string name="copy_private_key">Private Key</string>
+    <string name="copy_wif">Private Key WIF</string>
+    
+    <!-- Dialogs -->
+    <string name="dialog_warning_title">⚠️ Warning</string>
+    <string name="dialog_warning_msg">You are about to copy %1$s to the clipboard.\n\nThis information is extremely sensitive. Anyone with access to it can steal your funds.\n\nAre you sure?</string>
+    <string name="btn_yes_copy">Yes, copy</string>
+    <string name="btn_cancel">Cancel</string>
+    
+    <string name="dialog_about_title">About Bitcoin Wallet Generator</string>
+    <string name="dialog_about_msg">Secure and offline Bitcoin wallet generator.\n\nThis app replicates exactly the standard Bitcoin cryptographic logic:\n• SHA-256 for entropy\n• ECDSA (secp256k1) for keys\n• RIPEMD-160 for addresses\n\nVersion 2.0\nOpen source and verifiable.\n\n\"Don\'t trust, verify.\"\n\n%1$s</string>
+    
+    <string name="dialog_privacy_title">Privacy Policy</string>
+    <string name="dialog_privacy_msg">Your privacy is absolute.\n\n1. 100\% Offline: This app has no internet permission.\n2. No Tracking: We do not collect data, analytics, or personal information.\n3. Ephemeral: Keys are generated in RAM and cleared when the app closes.\n\n⚠️ IMPORTANT ON RECOVERY:\n• You can regenerate your private key using the SAME seed in this app.\n• If someone else finds your seed, they can also regenerate your key.\n• Keep your seed SAFE and PRIVATE.\n\nComplies with Google Play Policies 2025.\n\n%1$s</string>
+</resources>

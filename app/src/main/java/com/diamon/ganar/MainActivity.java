@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
             String seed = binding.inputSeed.getText().toString();
 
             if (seed.isEmpty()) {
-                Snackbar.make(binding.getRoot(), "Por favor ingrese un texto semilla", Snackbar.LENGTH_SHORT).show();
+                Snackbar.make(binding.getRoot(), getString(R.string.msg_enter_seed), Snackbar.LENGTH_SHORT).show();
                 return;
             }
 
@@ -107,7 +107,8 @@ public class MainActivity extends AppCompatActivity {
             binding.btnToggleVisibility.setIconResource(iconRes);
 
             // Actualizar texto
-            binding.btnToggleVisibility.setText(isPrivKeyVisible ? "Ocultar" : "Mostrar");
+            binding.btnToggleVisibility
+                    .setText(isPrivKeyVisible ? getString(R.string.btn_hide) : getString(R.string.btn_show));
 
             // Aplicar/remover FLAG_SECURE
             if (isPrivKeyVisible) {
@@ -157,12 +158,12 @@ public class MainActivity extends AppCompatActivity {
      * Muestra información del archivo procesado.
      */
     private void updateFileInfo(FileProcessingResult fileInfo) {
-        String message = "Archivo: " + fileInfo.fileName + " (" +
-                FileProcessingResult.formatSize(fileInfo.originalSize) + ")";
+        String message = getString(R.string.file_info_template, fileInfo.fileName,
+                FileProcessingResult.formatSize(fileInfo.originalSize));
 
         if (fileInfo.wasCompressed) {
-            message += "\n✓ Comprimido " + fileInfo.getCompressionRatio() + "% → " +
-                    FileProcessingResult.formatSize(fileInfo.processedSize);
+            message += getString(R.string.file_compressed_template, fileInfo.getCompressionRatio(),
+                    FileProcessingResult.formatSize(fileInfo.processedSize));
         }
 
         binding.inputSeed.setText(message);
@@ -195,18 +196,20 @@ public class MainActivity extends AppCompatActivity {
     private void setupCopyButtons(WalletData wallet) {
         // Copiar dirección (seguro)
         binding.btnCopyAddress.setOnClickListener(v -> ClipboardUtils.copyToClipboard(this, binding.getRoot(),
-                "Dirección Bitcoin", wallet.address));
+                getString(R.string.copy_address), wallet.address));
 
         // Copiar clave pública (seguro)
         binding.btnCopyPublicKey.setOnClickListener(v -> ClipboardUtils.copyToClipboard(this, binding.getRoot(),
-                "Clave Pública", wallet.publicKeyHex));
+                getString(R.string.copy_public_key), wallet.publicKeyHex));
 
         // Copiar clave privada (sensible - con confirmación)
         binding.btnCopyPrivateKey
-                .setOnClickListener(v -> showCopyConfirmationDialog("Clave Privada", wallet.privateKeyHex));
+                .setOnClickListener(
+                        v -> showCopyConfirmationDialog(getString(R.string.copy_private_key), wallet.privateKeyHex));
 
         // Copiar WIF (sensible - con confirmación)
-        binding.btnCopyWif.setOnClickListener(v -> showCopyConfirmationDialog("WIF", wallet.wif));
+        binding.btnCopyWif
+                .setOnClickListener(v -> showCopyConfirmationDialog(getString(R.string.copy_wif), wallet.wif));
     }
 
     /**
@@ -214,15 +217,12 @@ public class MainActivity extends AppCompatActivity {
      */
     private void showCopyConfirmationDialog(String label, String data) {
         new MaterialAlertDialogBuilder(this)
-                .setTitle("⚠️ Advertencia")
-                .setMessage("Estás a punto de copiar " + label + " al portapapeles.\n\n" +
-                        "Esta información es extremadamente sensible. " +
-                        "Cualquiera con acceso a ella puede robar tus fondos.\n\n" +
-                        "¿Estás seguro?")
-                .setPositiveButton("Sí, copiar",
+                .setTitle(getString(R.string.dialog_warning_title))
+                .setMessage(getString(R.string.dialog_warning_msg, label))
+                .setPositiveButton(getString(R.string.btn_yes_copy),
                         (dialog, which) -> ClipboardUtils.copySensitiveToClipboard(this, binding.getRoot(), label,
                                 data))
-                .setNegativeButton("Cancelar", null)
+                .setNegativeButton(getString(R.string.btn_cancel), null)
                 .show();
     }
 
@@ -253,7 +253,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Resetear visibilidad
         isPrivKeyVisible = false;
-        binding.btnToggleVisibility.setText("Mostrar");
+        binding.btnToggleVisibility.setText(getString(R.string.btn_show));
         binding.btnToggleVisibility.setIconResource(R.drawable.ic_visibility);
 
         // Remover FLAG_SECURE
@@ -283,16 +283,10 @@ public class MainActivity extends AppCompatActivity {
      */
     private void showAboutDialog() {
         new MaterialAlertDialogBuilder(this)
-                .setTitle("Acerca de Bitcoin Wallet Generator")
+                .setTitle(getString(R.string.dialog_about_title))
                 .setIcon(R.drawable.ic_btc_shield)
-                .setMessage("Generador de carteras Bitcoin seguro y offline.\n\n" +
-                        "Esta aplicación replica exactamente la lógica criptográfica estándar de Bitcoin:\n" +
-                        "• SHA-256 para entropía\n" +
-                        "• ECDSA (secp256k1) para claves\n" +
-                        "• RIPEMD-160 para direcciones\n\n" +
-                        "Versión 2.0\n" +
-                        "Código abierto y verificable.\n\n" +
-                        "\"No confíes, verifica.\"")
+                .setMessage(
+                        getString(R.string.dialog_about_msg, "https://github.com/Danielk10/Generador-Cartera-Bitcoin"))
                 .setPositiveButton("Entendido", null)
                 .show();
     }
@@ -302,17 +296,9 @@ public class MainActivity extends AppCompatActivity {
      */
     private void showPrivacyDialog() {
         new MaterialAlertDialogBuilder(this)
-                .setTitle("Política de Privacidad")
+                .setTitle(getString(R.string.dialog_privacy_title))
                 .setIcon(R.drawable.ic_btc_shield)
-                .setMessage("Tu privacidad es absoluta.\n\n" +
-                        "1. 100% Offline: Esta app no tiene permiso de internet.\n" +
-                        "2. Sin Rastreo: No recolectamos datos, analíticas ni información personal.\n" +
-                        "3. Efímero: Las claves se generan en la memoria RAM y se borran al cerrar la app.\n\n" +
-                        "⚠️ IMPORTANTE SOBRE RECUPERACIÓN:\n" +
-                        "• Puedes regenerar tu clave privada usando la MISMA semilla en esta app.\n" +
-                        "• Si otra persona encuentra tu semilla, también puede regenerar tu clave.\n" +
-                        "• Guarda tu semilla de forma SEGURA y PRIVADA.\n\n" +
-                        "Cumple con las Políticas de Google Play 2025.")
+                .setMessage(getString(R.string.dialog_privacy_msg, "https://generadorcarterasbitcoin.blogspot.com/"))
                 .setPositiveButton("Aceptar", null)
                 .show();
     }
@@ -325,7 +311,7 @@ public class MainActivity extends AppCompatActivity {
         if (isPrivKeyVisible) {
             isPrivKeyVisible = false;
             updateVisibility();
-            binding.btnToggleVisibility.setText("Mostrar");
+            binding.btnToggleVisibility.setText(getString(R.string.btn_show));
             binding.btnToggleVisibility.setIconResource(R.drawable.ic_visibility);
         }
 

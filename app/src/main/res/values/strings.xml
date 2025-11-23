@@ -1,3 +1,48 @@
 <resources>
-    <string name="app_name">Generador-Cartera-Bitcoin</string>
+    <string name="app_name">Generador de Carteras Bitcoin</string>
+    
+    <!-- UI Labels -->
+    <string name="generate_new_wallet">Generar Nueva Cartera</string>
+    <string name="enter_seed_or_file">Ingrese una frase semilla o seleccione un archivo para generar entropía.</string>
+    <string name="seed_hint">Frase Semilla (Texto)</string>
+    <string name="btn_file">Archivo</string>
+    <string name="btn_generate">Generar</string>
+    <string name="btn_clear">Limpiar Campos</string>
+    <string name="results_secure">Resultados Seguros</string>
+    <string name="btn_show">Mostrar</string>
+    <string name="btn_hide">Ocultar</string>
+    
+    <!-- Result Labels -->
+    <string name="label_address">DIRECCIÓN BITCOIN (P2PKH)</string>
+    <string name="label_public_key">Clave Pública (Hex)</string>
+    <string name="label_private_key">⚠️ Clave Privada (Hex)</string>
+    <string name="label_wif">⚠️ Llave Privada WIF</string>
+    <string name="warning_text">⚠️ ADVERTENCIA: Nunca compartas tu clave privada o WIF. Quien tenga acceso a ellas puede robar tus fondos. Puedes regenerar estas claves usando la misma semilla en esta app.</string>
+    
+    <!-- Menu -->
+    <string name="menu_privacy">Privacidad</string>
+    <string name="menu_about">Acerca de</string>
+    
+    <!-- Messages -->
+    <string name="msg_enter_seed">Por favor ingrese un texto semilla</string>
+    <string name="file_info_template">Archivo: %1$s (%2$s)</string>
+    <string name="file_compressed_template">\n✓ Comprimido %1$s%% → %2$s</string>
+    
+    <!-- Copy Labels -->
+    <string name="copy_address">Dirección Bitcoin</string>
+    <string name="copy_public_key">Clave Pública</string>
+    <string name="copy_private_key">Clave Privada</string>
+    <string name="copy_wif">Llave Privada WIF</string>
+    
+    <!-- Dialogs -->
+    <string name="dialog_warning_title">⚠️ Advertencia</string>
+    <string name="dialog_warning_msg">Estás a punto de copiar %1$s al portapapeles.\n\nEsta información es extremadamente sensible. Cualquiera con acceso a ella puede robar tus fondos.\n\n¿Estás seguro?</string>
+    <string name="btn_yes_copy">Sí, copiar</string>
+    <string name="btn_cancel">Cancelar</string>
+    
+    <string name="dialog_about_title">Acerca de Bitcoin Wallet Generator</string>
+    <string name="dialog_about_msg">Generador de carteras Bitcoin seguro y offline.\n\nEsta aplicación replica exactamente la lógica criptográfica estándar de Bitcoin:\n• SHA-256 para entropía\n• ECDSA (secp256k1) para claves\n• RIPEMD-160 para direcciones\n\nVersión 2.0\nCódigo abierto y verificable.\n\n\"No confíes, verifica.\"\n\n%1$s</string>
+    
+    <string name="dialog_privacy_title">Política de Privacidad</string>
+    <string name="dialog_privacy_msg">Tu privacidad es absoluta.\n\n1. 100\% Offline: Esta app no tiene permiso de internet.\n2. Sin Rastreo: No recolectamos datos, analíticas ni información personal.\n3. Efímero: Las claves se generan en la memoria RAM y se borran al cerrar la app.\n\n⚠️ IMPORTANTE SOBRE RECUPERACIÓN:\n• Puedes regenerar tu clave privada usando la MISMA semilla en esta app.\n• Si otra persona encuentra tu semilla, también puede regenerar tu clave.\n• Guarda tu semilla de forma SEGURA y PRIVADA.\n\nCumple con las Políticas de Google Play 2025.\n\n%1$s</string>
 </resources>

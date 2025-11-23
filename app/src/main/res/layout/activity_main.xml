@@ -18,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
-            app:title="Generador de Cartera Bitcoin"
+            app:title="@string/app_name"
             app:titleTextColor="@android:color/white"
             app:menu="@menu/main_menu" />
 
@@ -55,7 +55,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Generar Nueva Cartera"
+                        android:text="@string/generate_new_wallet"
                         android:textAppearance="?attr/textAppearanceTitleMedium"
                         android:textStyle="bold"
                         android:textColor="@color/btc_dark"/>
@@ -64,7 +64,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
-                        android:text="Ingrese una frase semilla o seleccione un archivo para generar entropía."
+                        android:text="@string/enter_seed_or_file"
                         android:textAppearance="?attr/textAppearanceBodyMedium"
                         android:textColor="@color/btc_dark"/>
 
@@ -75,7 +75,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
-                        android:hint="Frase Semilla (Texto)">
+                        android:hint="@string/seed_hint">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/inputSeed"
@@ -99,7 +99,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="4dp"
                             app:icon="@drawable/ic_file" 
-                            android:text="Archivo" />
+                            android:text="@string/btn_file" />
 
                         <Button
                             android:id="@+id/btnGenerate"
@@ -108,7 +108,7 @@
                             android:layout_weight="1"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="4dp"
-                            android:text="Generar"
+                            android:text="@string/btn_generate"
                             android:backgroundTint="@color/btc_orange"/>
                     </LinearLayout>
                     
@@ -117,7 +117,7 @@
                         style="@style/Widget.Material3.Button.TextButton"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Limpiar Campos" 
+                        android:text="@string/btn_clear" 
                         android:textColor="@color/errorColor"/>
 
                 </LinearLayout>
@@ -151,7 +151,7 @@
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
-                        android:text="Resultados Seguros"
+                        android:text="@string/results_secure"
                         android:textAppearance="?attr/textAppearanceTitleMedium"
                         android:textStyle="bold"/>
 
@@ -160,7 +160,7 @@
                         style="@style/Widget.Material3.Button.OutlinedButton.Icon"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Mostrar"
+                        android:text="@string/btn_show"
                         app:icon="@drawable/ic_visibility" />
                 </LinearLayout>
 
@@ -189,7 +189,7 @@
                                 android:layout_width="0dp"
                                 android:layout_weight="1"
                                 android:layout_height="wrap_content"
-                                android:text="DIRECCIÓN BITCOIN (P2PKH)"
+                                android:text="@string/label_address"
                                 android:textAppearance="?attr/textAppearanceLabelLarge"
                                 android:textColor="@color/btc_orange"
                                 android:textStyle="bold" />
@@ -200,7 +200,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 app:icon="@drawable/ic_copy"
-                                android:contentDescription="Copiar dirección"/>
+                                android:contentDescription="@string/copy_address"/>
                         </LinearLayout>
                             
                         <TextView
@@ -241,7 +241,7 @@
                                 android:layout_width="0dp"
                                 android:layout_weight="1"
                                 android:layout_height="wrap_content"
-                                android:text="Clave Pública (Hex)"
+                                android:text="@string/label_public_key"
                                 android:textAppearance="?attr/textAppearanceLabelMedium"
                                 android:textStyle="bold" />
                             
@@ -251,7 +251,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 app:icon="@drawable/ic_copy"
-                                android:contentDescription="Copiar clave pública"/>
+                                android:contentDescription="@string/copy_public_key"/>
                         </LinearLayout>
                             
                         <TextView
@@ -291,7 +291,7 @@
                                 android:layout_width="0dp"
                                 android:layout_weight="1"
                                 android:layout_height="wrap_content"
-                                android:text="⚠️ Clave Privada (Hex)"
+                                android:text="@string/label_private_key"
                                 android:textAppearance="?attr/textAppearanceLabelMedium"
                                 android:textStyle="bold"
                                 android:textColor="@color/errorColor" />
@@ -302,7 +302,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 app:icon="@drawable/ic_copy"
-                                android:contentDescription="Copiar clave privada"/>
+                                android:contentDescription="@string/copy_private_key"/>
                         </LinearLayout>
                             
                         <TextView
@@ -342,7 +342,7 @@
                                 android:layout_width="0dp"
                                 android:layout_weight="1"
                                 android:layout_height="wrap_content"
-                                android:text="⚠️ WIF (Wallet Import Format)"
+                                android:text="@string/label_wif"
                                 android:textAppearance="?attr/textAppearanceLabelMedium"
                                 android:textStyle="bold"
                                 android:textColor="@color/errorColor" />
@@ -353,7 +353,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 app:icon="@drawable/ic_copy"
-                                android:contentDescription="Copiar WIF"/>
+                                android:contentDescription="@string/copy_wif"/>
                         </LinearLayout>
                             
                         <TextView
@@ -374,7 +374,7 @@
                     android:layout_marginTop="8dp"
                     android:padding="12dp"
                     android:background="#FFF3E0"
-                    android:text="⚠️ ADVERTENCIA: Nunca compartas tu clave privada o WIF. Quien tenga acceso a ellas puede robar tus fondos. Puedes regenerar estas claves usando la misma semilla en esta app."
+                    android:text="@string/warning_text"
                     android:textAppearance="?attr/textAppearanceBodySmall"
                     android:textColor="#E65100"
                     android:textStyle="bold"/>
