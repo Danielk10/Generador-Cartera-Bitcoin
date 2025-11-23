@@ -18,9 +18,20 @@ import java.security.Security;
  */
 public class CryptoUtils {
 
-    // Inicializar Bouncy Castle provider para RIPEMD-160
-    static {
-        Security.addProvider(new BouncyCastleProvider());
+    private static boolean providerInitialized = false;
+
+    /**
+     * Inicializa el provider de Bouncy Castle para RIPEMD-160.
+     * Se llama automáticamente antes de usar algoritmos que lo requieren.
+     */
+    private static synchronized void ensureProviderInitialized() {
+        if (!providerInitialized) {
+            // Remover provider existente si existe para evitar conflictos
+            Security.removeProvider("BC");
+            // Agregar Bouncy Castle provider
+            Security.addProvider(new BouncyCastleProvider());
+            providerInitialized = true;
+        }
     }
 
     /**
@@ -83,6 +94,9 @@ public class CryptoUtils {
      * @throws Exception Si algún algoritmo no está disponible
      */
     public static String generateAddress(byte[] publicKey) throws Exception {
+        // Asegurar que Bouncy Castle está inicializado
+        ensureProviderInitialized();
+
         // SHA-256 de la clave pública
         MessageDigest sha256 = MessageDigest.getInstance("SHA-256");
         byte[] sha256Hash = sha256.digest(publicKey);
