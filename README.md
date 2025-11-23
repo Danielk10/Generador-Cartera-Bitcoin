@@ -1,36 +1,44 @@
-# Generador de Cartera Bitcoin - Android Nativo
+# Generador de Cartera Bitcoin (Android)
 
-Aplicación Android de código abierto que genera carteras de Bitcoin (Direcciones P2PKH) a partir de una "semilla" (texto o archivo) utilizando operaciones criptográficas matemáticas puras.
-
-Esta aplicación es una migración directa y fiel de un script de Python educativo, implementado ahora en Java Nativo con Material Design 3.
+Aplicación Android nativa para generar carteras Bitcoin (Legacy P2PKH) de forma segura y offline.
 
 ## Características
 
-*   **Generación determinista:** `Clave Privada = SHA256(SHA256(semilla))`.
-*   **Soporte de archivos:** Use una imagen, video o documento como su llave maestra.
-*   **Criptografía Estándar:** Implementación de curvas elípticas SECP256k1 y RIPEMD160 mediante Bouncy Castle.
-*   **Offline por diseño:** Sin permisos de internet. Todo ocurre en su dispositivo.
-*   **Seguridad Visual:** Las claves privadas están ocultas por defecto.
+*   **Generación Determinista**: Crea claves a partir de una frase semilla (texto) o un archivo (imagen, video, etc.) usando SHA-256.
+*   **100% Offline**: Todo el proceso ocurre localmente en tu dispositivo. No se requiere conexión a internet.
+*   **Estándares Bitcoin**: Implementación fiel de SHA-256, RIPEMD-160, y Curva Elíptica secp256k1.
+*   **Privacidad**: Las claves se generan en memoria RAM y se destruyen al cerrar la aplicación.
 
-## Compatibilidad
+## Cómo Funciona
 
-Las claves generadas en formato WIF (Wallet Import Format) son compatibles para importación en monederos estándar como **Electrum**, **Mycelium** o **Bitcoin Core**.
+La aplicación sigue el proceso estándar de generación de direcciones Bitcoin:
 
-## Cómo compilar
+1.  **Entropía**: Se calcula el hash SHA-256 de tu entrada (texto o archivo).
+2.  **Clave Privada**: El resultado del hash es tu clave privada (256 bits).
+3.  **WIF (Wallet Import Format)**: La clave privada se codifica en Base58Check para facilitar su importación.
+4.  **Clave Pública**: Se deriva de la clave privada usando ECDSA (secp256k1).
+5.  **Dirección**: Se aplica SHA-256 y luego RIPEMD-160 a la clave pública, seguido de codificación Base58Check.
 
-1. Clonar este repositorio.
-2. Abrir en Android Studio (Hedgehog o superior).
-3. Sincronizar con Gradle.
-4. Ejecutar en un dispositivo o emulador (API 23+).
+## Importar en Electrum
 
-## DESCARGO DE RESPONSABILIDAD (Disclaimer)
+Las claves generadas son totalmente compatibles con carteras estándar como Electrum.
 
-**ÚSELO BAJO SU PROPIO RIESGO.**
+1.  Abre Electrum y crea una nueva cartera.
+2.  Selecciona "Importar claves privadas o direcciones".
+3.  Copia el **WIF** (comienza con '5', 'K' o 'L') generado por esta app.
+4.  Pégalo en Electrum.
 
-Esta aplicación se proporciona "tal cual", sin garantía de ningún tipo. El desarrollador no se hace responsable de la pérdida de fondos derivada de un mal uso, fallos en el generador de números aleatorios (aunque esta app es determinista basada en su input), o compromiso del dispositivo Android.
+> **Nota**: Esta app genera direcciones Legacy (empiezan con '1').
 
-*   Si pierde el archivo o frase "semilla", **perderá sus fondos para siempre**.
-*   Cualquier persona con acceso a su archivo "semilla" puede recrear su clave privada y gastar sus fondos.
+## Descargo de Responsabilidad (Disclaimer)
+
+**USAR BAJO SU PROPIO RIESGO.**
+
+Este software se proporciona "tal cual", sin garantía de ningún tipo, expresa o implícita. En ningún caso los autores serán responsables de ninguna reclamación, daño u otra responsabilidad, ya sea en una acción de contrato, agravio o de otro tipo, que surja de, fuera de o en conexión con el software o el uso u otros tratos en el software.
+
+*   Si pierdes tu semilla o archivo de entrada, **pierdes tus fondos**.
+*   Si alguien más tiene acceso a tu semilla o archivo, **puede robar tus fondos**.
+*   Se recomienda usar este generador en un dispositivo seguro y libre de malware.
 
 ## Licencia
 

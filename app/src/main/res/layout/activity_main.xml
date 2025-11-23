@@ -1,185 +1,322 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout
-xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:app="http://schemas.android.com/apk/res-auto"
-xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-tools:context=".MainActivity">
-
-<!-- 1. ESTE ES EL BLOQUE QUE FALTABA -->
-<com.google.android.material.appbar.AppBarLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-
-    <com.google.android.material.appbar.MaterialToolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
-        app:title="Bitcoin Wallet"
-        app:titleTextColor="@android:color/white"
-        app:menu="@menu/main_menu" />
-
-</com.google.android.material.appbar.AppBarLayout>
-
-<!-- 2. Fíjate que agregué app:layout_behavior aquí abajo -->
-<androidx.core.widget.NestedScrollView
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+    android:background="?attr/backgroundColor"
+    tools:context=".MainActivity">
 
-    <LinearLayout
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="wrap_content">
 
-        <!-- Inputs -->
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/inputLayout"
-            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Semilla (Texto) o elija archivo">
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:title="Bitcoin Wallet Generator"
+            app:titleTextColor="@android:color/white"
+            app:menu="@menu/main_menu" />
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/inputSeed"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textMultiLine" />
-        </com.google.android.material.textfield.TextInputLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/btnLoadFile"
-                style="@style/Widget.Material3.Button.OutlinedButton"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="4dp"
-                android:text="Cargar Archivo" />
-
-            <Button
-                android:id="@+id/btnGenerate"
-                style="@style/Widget.Material3.Button.TonalButton"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:text="Generar" />
-        </LinearLayout>
-
-        <Button
-            android:id="@+id/btnClear"
-            style="@style/Widget.Material3.Button.TextButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Limpiar" />
-
-        <ProgressBar
-            android:id="@+id/progressBar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:visibility="gone"
-            android:layout_marginTop="16dp"/>
-
-        <!-- Resultados -->
-        <LinearLayout
-            android:id="@+id/resultsLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:visibility="gone"
-            android:layout_marginTop="16dp">
+            android:paddingBottom="24dp">
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnToggleVisibility"
-                style="@style/Widget.Material3.Button.OutlinedButton.Icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:text="Mostrar Privadas"
-                app:icon="@drawable/ic_visibility" />
-
-            <!-- Dirección -->
+            <!-- Header Card -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
-                android:layout_marginTop="8dp">
+                android:layout_marginBottom="16dp"
+                app:cardElevation="2dp"
+                app:cardCornerRadius="12dp"
+                app:strokeColor="@color/btc_orange"
+                app:strokeWidth="1dp">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="16dp"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="DIRECCIÓN BITCOIN"
-                        android:textStyle="bold" />
+                        android:text="Generar Nueva Cartera"
+                        android:textAppearance="?attr/textAppearanceTitleMedium"
+                        android:textStyle="bold"
+                        android:textColor="@color/btc_dark"/>
+
                     <TextView
-                        android:id="@+id/tvAddress"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="Ingrese una frase semilla o seleccione un archivo para generar entropía."
+                        android:textAppearance="?attr/textAppearanceBodyMedium"
+                        android:textColor="@color/btc_dark"/>
+
+                    <!-- Inputs -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/inputLayout"
+                        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textIsSelectable="true"
-                        android:textSize="16sp"
-                        android:textStyle="bold"/>
+                        android:layout_marginTop="16dp"
+                        android:hint="Frase Semilla (Texto)">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/inputSeed"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="textMultiLine"
+                            android:minLines="2"/>
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:orientation="horizontal">
+
+                        <Button
+                            android:id="@+id/btnLoadFile"
+                            style="@style/Widget.Material3.Button.OutlinedButton"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="4dp"
+                            app:icon="@drawable/ic_btc_shield" 
+                            android:text="Archivo" />
+
+                        <Button
+                            android:id="@+id/btnGenerate"
+                            style="@style/Widget.Material3.Button"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="4dp"
+                            android:text="Generar"
+                            android:backgroundTint="@color/btc_orange"/>
+                    </LinearLayout>
+                    
+                    <Button
+                        android:id="@+id/btnClear"
+                        style="@style/Widget.Material3.Button.TextButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Limpiar Campos" 
+                        android:textColor="@color/errorColor"/>
+
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Clave Pública -->
-            <TextView
+            <ProgressBar
+                android:id="@+id/progressBar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Clave Pública (Hex)" />
-            <TextView
-                android:id="@+id/tvPublicKey"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#EEE"
-                android:padding="8dp"
-                android:textIsSelectable="true" />
+                android:layout_gravity="center"
+                android:visibility="gone"
+                android:layout_marginTop="16dp"/>
 
-            <!-- WIF -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="Clave Privada (WIF)"
-                android:textColor="#C62828"/>
-            <TextView
-                android:id="@+id/tvWif"
+            <!-- Resultados -->
+            <LinearLayout
+                android:id="@+id/resultsLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#FFEBEE"
-                android:padding="8dp"
-                android:textIsSelectable="true"
-                android:inputType="textPassword"/>
+                android:orientation="vertical"
+                android:visibility="gone"
+                android:layout_marginTop="8dp">
 
-            <!-- Private Key -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="Clave Privada (Hex)"
-                android:textColor="#C62828"/>
-            <TextView
-                android:id="@+id/tvPrivateKey"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#FFEBEE"
-                android:padding="8dp"
-                android:textIsSelectable="true"
-                android:inputType="textPassword"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="8dp">
+                    
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="Resultados Seguros"
+                        android:textAppearance="?attr/textAppearanceTitleMedium"
+                        android:textStyle="bold"/>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnToggleVisibility"
+                        style="@style/Widget.Material3.Button.OutlinedButton.Icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Mostrar"
+                        app:icon="@drawable/ic_visibility" />
+                </LinearLayout>
+
+                <!-- Dirección -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="12dp"
+                    app:cardElevation="4dp"
+                    app:cardCornerRadius="12dp"
+                    app:cardBackgroundColor="@color/white">
+                    
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="16dp"
+                        android:orientation="vertical">
+                        
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="DIRECCIÓN BITCOIN (P2PKH)"
+                            android:textAppearance="?attr/textAppearanceLabelLarge"
+                            android:textColor="@color/btc_orange"
+                            android:textStyle="bold" />
+                            
+                        <TextView
+                            android:id="@+id/tvAddress"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textIsSelectable="true"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            android:layout_marginTop="4dp"
+                            android:fontFamily="monospace"/>
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Clave Pública -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="12dp"
+                    app:cardElevation="1dp"
+                    app:cardCornerRadius="8dp"
+                    app:strokeColor="#E0E0E0"
+                    app:strokeWidth="1dp">
+                    
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="12dp"
+                        android:orientation="vertical">
+                        
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Clave Pública (Hex)"
+                            android:textAppearance="?attr/textAppearanceLabelMedium"
+                            android:textColor="@color/btc_dark"/>
+                            
+                        <TextView
+                            android:id="@+id/tvPublicKey"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="#F5F5F5"
+                            android:padding="8dp"
+                            android:layout_marginTop="4dp"
+                            android:textIsSelectable="true"
+                            android:fontFamily="monospace"
+                            android:textSize="12sp"/>
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- WIF -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="12dp"
+                    app:cardElevation="1dp"
+                    app:cardCornerRadius="8dp"
+                    app:strokeColor="#FFCDD2"
+                    app:strokeWidth="1dp">
+                    
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="12dp"
+                        android:orientation="vertical">
+                        
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Clave Privada (WIF)"
+                            android:textAppearance="?attr/textAppearanceLabelMedium"
+                            android:textColor="@color/errorColor"
+                            android:textStyle="bold"/>
+                            
+                        <TextView
+                            android:id="@+id/tvWif"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="#FFEBEE"
+                            android:padding="8dp"
+                            android:layout_marginTop="4dp"
+                            android:textIsSelectable="true"
+                            android:inputType="textPassword"
+                            android:fontFamily="monospace"/>
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Private Key -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardElevation="1dp"
+                    app:cardCornerRadius="8dp"
+                    app:strokeColor="#FFCDD2"
+                    app:strokeWidth="1dp">
+                    
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="12dp"
+                        android:orientation="vertical">
+                        
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Clave Privada (Hex)"
+                            android:textAppearance="?attr/textAppearanceLabelMedium"
+                            android:textColor="@color/errorColor"
+                            android:textStyle="bold"/>
+                            
+                        <TextView
+                            android:id="@+id/tvPrivateKey"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="#FFEBEE"
+                            android:padding="8dp"
+                            android:layout_marginTop="4dp"
+                            android:textIsSelectable="true"
+                            android:inputType="textPassword"
+                            android:fontFamily="monospace"/>
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+                
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="⚠️ NUNCA comparta su clave privada o WIF con nadie."
+                    android:textColor="@color/errorColor"
+                    android:gravity="center"
+                    android:layout_marginTop="16dp"
+                    android:textSize="12sp"/>
+            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
-</androidx.core.widget.NestedScrollView>
+    </androidx.core.widget.NestedScrollView>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

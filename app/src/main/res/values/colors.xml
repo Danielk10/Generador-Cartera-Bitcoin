@@ -2,12 +2,20 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="purple_200">#FFBB86FC</color>
-    <color name="purple_500">#6200EE</color>
-    <color name="purple_700">#3700B3</color>
-    <color name="teal_200">#03DAC5</color>
-    <color name="teal_700">#018786</color>
-    <!-- Tonos Bitcoin -->
+    
+    <!-- Bitcoin Brand Colors -->
     <color name="btc_orange">#F7931A</color>
+    <color name="btc_gold">#FFD700</color>
     <color name="btc_dark">#4D4D4D</color>
+    <color name="btc_light_bg">#FFF8E1</color> <!-- Very light orange/gold for backgrounds -->
+    
+    <!-- Semantic Colors -->
+    <color name="primaryColor">@color/btc_orange</color>
+    <color name="primaryDarkColor">#C66900</color>
+    <color name="secondaryColor">@color/btc_dark</color>
+    
+    <color name="surfaceColor">@color/white</color>
+    <color name="backgroundColor">@color/btc_light_bg</color>
+    
+    <color name="errorColor">#B00020</color>
 </resources>
