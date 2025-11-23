@@ -11,6 +11,7 @@ import android.view.View;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.text.HtmlCompat;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.diamon.ganar.databinding.ActivityMainBinding;
@@ -285,7 +286,7 @@ public class MainActivity extends AppCompatActivity {
         String message = getString(R.string.dialog_about_msg,
                 "<a href='https://github.com/Danielk10/Generador-Cartera-Bitcoin'>GitHub Repository</a>");
 
-        android.text.Spanned spanned = android.text.Html.fromHtml(message, android.text.Html.FROM_HTML_MODE_LEGACY);
+        android.text.Spanned spanned = HtmlCompat.fromHtml(message, HtmlCompat.FROM_HTML_MODE_LEGACY);
 
         final androidx.appcompat.app.AlertDialog dialog = new MaterialAlertDialogBuilder(this)
                 .setTitle(getString(R.string.dialog_about_title))
@@ -308,7 +309,7 @@ public class MainActivity extends AppCompatActivity {
         String message = getString(R.string.dialog_privacy_msg,
                 "<a href='https://generadorcarterasbitcoin.blogspot.com/'>Privacy Policy Blog</a>");
 
-        android.text.Spanned spanned = android.text.Html.fromHtml(message, android.text.Html.FROM_HTML_MODE_LEGACY);
+        android.text.Spanned spanned = HtmlCompat.fromHtml(message, HtmlCompat.FROM_HTML_MODE_LEGACY);
 
         final androidx.appcompat.app.AlertDialog dialog = new MaterialAlertDialogBuilder(this)
                 .setTitle(getString(R.string.dialog_privacy_title))
