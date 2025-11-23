@@ -1,99 +1,88 @@
-package com.diamon.ganar; // Unificado
+package com.diamon.ganar;
 
-import org.bouncycastle.jce.ECNamedCurveTable;
-import org.bouncycastle.jce.provider.BouncyCastleProvider;
-import org.bouncycastle.jce.spec.ECNamedCurveParameterSpec;
-import org.bouncycastle.math.ec.ECPoint;
+import com.diamon.ganar.utils.Base58Utils;
+import com.diamon.ganar.utils.CryptoUtils;
 
-import java.math.BigInteger;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.security.Security;
-import java.util.Arrays;
-
+/**
+ * Fachada principal para operaciones criptográficas de Bitcoin.
+ * Delega a clases de utilidad especializadas.
+ * 
+ * @author Bitcoin Wallet Generator
+ * @version 2.0
+ * @deprecated Usar directamente CryptoUtils y Base58Utils para nuevo código
+ */
 public class BitcoinUtils {
 
-    private static final String ALPHABET = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz";
-    private static final BigInteger BASE58 = BigInteger.valueOf(58);
-
-    static {
-        // Importante: Eliminar primero para evitar conflictos y añadir la versión incluida
-        Security.removeProvider("BC");
-        Security.addProvider(new BouncyCastleProvider());
+    /**
+     * Genera clave privada desde semilla.
+     * 
+     * @param seedBytes Bytes de la semilla
+     * @return Clave privada de 32 bytes
+     * @throws Exception Si hay error criptográfico
+     */
+    public static byte[] generatePrivateKeyFromSeed(byte[] seedBytes) throws Exception {
+        return CryptoUtils.generatePrivateKey(seedBytes);
     }
 
-    public static byte[] generatePrivateKeyFromSeed(byte[] seedBytes) throws NoSuchAlgorithmException {
-        MessageDigest sha256 = MessageDigest.getInstance("SHA-256");
-        byte[] firstHash = sha256.digest(seedBytes);
-        return sha256.digest(firstHash);
-    }
-
+    /**
+     * Deriva clave pública desde clave privada.
+     * 
+     * @param privateKeyBytes Clave privada
+     * @return Clave pública no comprimida
+     */
     public static byte[] getPublicKey(byte[] privateKeyBytes) {
-        ECNamedCurveParameterSpec spec = ECNamedCurveTable.getParameterSpec("secp256k1");
-        BigInteger d = new BigInteger(1, privateKeyBytes);
-        ECPoint q = spec.getG().multiply(d).normalize();
-        return q.getEncoded(false); // false = uncompressed
+        return CryptoUtils.derivePublicKey(privateKeyBytes);
     }
 
-    public static String getWIF(byte[] privateKeyBytes) throws NoSuchAlgorithmException {
-        byte[] payload = new byte[1 + privateKeyBytes.length];
-        payload[0] = (byte) 0x80;
-        System.arraycopy(privateKeyBytes, 0, payload, 1, privateKeyBytes.length);
-        return base58CheckEncode(payload);
-    }
-
+    /**
+     * Genera dirección Bitcoin desde clave pública.
+     * 
+     * @param publicKeyBytes Clave pública
+     * @return Dirección Bitcoin en Base58Check
+     * @throws Exception Si hay error criptográfico
+     */
     public static String getAddress(byte[] publicKeyBytes) throws Exception {
-        MessageDigest sha256 = MessageDigest.getInstance("SHA-256");
-        byte[] sha256Hash = sha256.digest(publicKeyBytes);
-
-        // Especificar el proveedor "BC" explícitamente para RIPEMD160
-        MessageDigest ripemd160 = MessageDigest.getInstance("RIPEMD160", "BC");
-        byte[] hash160 = ripemd160.digest(sha256Hash);
-
-        byte[] payload = new byte[1 + hash160.length];
-        payload[0] = (byte) 0x00;
-        System.arraycopy(hash160, 0, payload, 1, hash160.length);
-
-        return base58CheckEncode(payload);
+        return CryptoUtils.generateAddress(publicKeyBytes);
     }
 
-    private static String base58CheckEncode(byte[] payload) throws NoSuchAlgorithmException {
-        MessageDigest sha256 = MessageDigest.getInstance("SHA-256");
-        byte[] hash1 = sha256.digest(payload);
-        byte[] hash2 = sha256.digest(hash1);
-        byte[] checksum = Arrays.copyOfRange(hash2, 0, 4);
-
-        byte[] resultBytes = new byte[payload.length + 4];
-        System.arraycopy(payload, 0, resultBytes, 0, payload.length);
-        System.arraycopy(checksum, 0, resultBytes, payload.length, 4);
-
-        int leadingZeros = 0;
-        for (byte b : resultBytes) {
-            if (b == 0) leadingZeros++;
-            else break;
-        }
-
-        BigInteger num = new BigInteger(1, resultBytes);
-        StringBuilder sb = new StringBuilder();
-
-        while (num.compareTo(BigInteger.ZERO) > 0) {
-            BigInteger[] divRem = num.divideAndRemainder(BASE58);
-            sb.insert(0, ALPHABET.charAt(divRem[1].intValue()));
-            num = divRem[0];
-        }
-
-        for (int i = 0; i < leadingZeros; i++) {
-            sb.insert(0, '1');
-        }
-
-        return sb.toString();
+    /**
+     * Genera WIF desde clave privada.
+     * 
+     * @param privateKeyBytes Clave privada
+     * @return WIF en Base58Check
+     * @throws Exception Si hay error criptográfico
+     */
+    public static String getWIF(byte[] privateKeyBytes) throws Exception {
+        return CryptoUtils.generateWIF(privateKeyBytes);
     }
 
+    /**
+     * Convierte bytes a hexadecimal.
+     * 
+     * @param bytes Bytes a convertir
+     * @return String hexadecimal
+     */
     public static String bytesToHex(byte[] bytes) {
-        StringBuilder sb = new StringBuilder();
-        for (byte b : bytes) {
-            sb.append(String.format("%02x", b));
-        }
-        return sb.toString();
+        return CryptoUtils.bytesToHex(bytes);
+    }
+
+    /**
+     * Convierte hexadecimal a bytes.
+     * 
+     * @param hex String hexadecimal
+     * @return Array de bytes
+     */
+    public static byte[] hexToBytes(String hex) {
+        return CryptoUtils.hexToBytes(hex);
+    }
+
+    /**
+     * Verifica si una cadena Base58Check es válida.
+     * 
+     * @param base58 Cadena a verificar
+     * @return true si es válida
+     */
+    public static boolean isValidBase58Check(String base58) {
+        return Base58Utils.isValidBase58Check(base58);
     }
 }
