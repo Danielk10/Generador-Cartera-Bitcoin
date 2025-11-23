@@ -4,9 +4,11 @@ plugins {
 
 android {
     namespace 'com.diamon.ganar'
-    compileSdk {
-        version = release(36)
-    }
+   // compileSdk {
+   //    version = release(36)
+   // }
+    
+    compileSdk 36
 
     defaultConfig {
         applicationId "com.diamon.ganar"
