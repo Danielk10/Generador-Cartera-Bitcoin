@@ -1,3 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/btc_light_bg"
+    tools:context=".MainActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
@@ -206,18 +220,51 @@
                             android:layout_height="wrap_content"
                             android:text="Clave Pública (Hex)"
                             android:textAppearance="?attr/textAppearanceLabelMedium"
-                            android:textColor="@color/btc_dark"/>
+                            android:textStyle="bold" />
                             
                         <TextView
                             android:id="@+id/tvPublicKey"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:background="#F5F5F5"
-                            android:padding="8dp"
-                            android:layout_marginTop="4dp"
                             android:textIsSelectable="true"
-                            android:fontFamily="monospace"
-                            android:textSize="12sp"/>
+                            android:textSize="12sp"
+                            android:layout_marginTop="4dp"
+                            android:fontFamily="monospace"/>
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Clave Privada -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="12dp"
+                    app:cardElevation="1dp"
+                    app:cardCornerRadius="8dp"
+                    app:strokeColor="#FFCDD2"
+                    app:strokeWidth="2dp">
+                    
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="12dp"
+                        android:orientation="vertical">
+                        
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="⚠️ Clave Privada (Hex)"
+                            android:textAppearance="?attr/textAppearanceLabelMedium"
+                            android:textStyle="bold"
+                            android:textColor="@color/errorColor" />
+                            
+                        <TextView
+                            android:id="@+id/tvPrivateKey"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textIsSelectable="true"
+                            android:textSize="12sp"
+                            android:layout_marginTop="4dp"
+                            android:fontFamily="monospace"/>
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
 
@@ -229,7 +276,7 @@
                     app:cardElevation="1dp"
                     app:cardCornerRadius="8dp"
                     app:strokeColor="#FFCDD2"
-                    app:strokeWidth="1dp">
+                    app:strokeWidth="2dp">
                     
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -240,69 +287,38 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Clave Privada (WIF)"
+                            android:text="⚠️ WIF (Wallet Import Format)"
                             android:textAppearance="?attr/textAppearanceLabelMedium"
-                            android:textColor="@color/errorColor"
-                            android:textStyle="bold"/>
+                            android:textStyle="bold"
+                            android:textColor="@color/errorColor" />
                             
                         <TextView
                             android:id="@+id/tvWif"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:background="#FFEBEE"
-                            android:padding="8dp"
-                            android:layout_marginTop="4dp"
                             android:textIsSelectable="true"
-                            android:inputType="textPassword"
+                            android:textSize="14sp"
+                            android:layout_marginTop="4dp"
                             android:fontFamily="monospace"/>
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
 
-                <!-- Private Key -->
-                <com.google.android.material.card.MaterialCardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:cardElevation="1dp"
-                    app:cardCornerRadius="8dp"
-                    app:strokeColor="#FFCDD2"
-                    app:strokeWidth="1dp">
-                    
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:padding="12dp"
-                        android:orientation="vertical">
-                        
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Clave Privada (Hex)"
-                            android:textAppearance="?attr/textAppearanceLabelMedium"
-                            android:textColor="@color/errorColor"
-                            android:textStyle="bold"/>
-                            
-                        <TextView
-                            android:id="@+id/tvPrivateKey"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:background="#FFEBEE"
-                            android:padding="8dp"
-                            android:layout_marginTop="4dp"
-                            android:textIsSelectable="true"
-                            android:inputType="textPassword"
-                            android:fontFamily="monospace"/>
-                    </LinearLayout>
-                </com.google.android.material.card.MaterialCardView>
-                
+                <!-- Warning -->
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="⚠️ NUNCA comparta su clave privada o WIF con nadie."
-                    android:textColor="@color/errorColor"
-                    android:gravity="center"
-                    android:layout_marginTop="16dp"
-                    android:textSize="12sp"/>
+                    android:layout_marginTop="8dp"
+                    android:padding="12dp"
+                    android:background="#FFF3E0"
+                    android:text="⚠️ ADVERTENCIA: Nunca compartas tu clave privada o WIF. Quien tenga acceso a ellas puede robar tus fondos."
+                    android:textAppearance="?attr/textAppearanceBodySmall"
+                    android:textColor="#E65100"
+                    android:textStyle="bold"/>
+
             </LinearLayout>
+
         </LinearLayout>
+
     </androidx.core.widget.NestedScrollView>
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
