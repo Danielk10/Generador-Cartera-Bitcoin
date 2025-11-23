@@ -53,7 +53,7 @@
 
 ```bash
 # Clonar el repositorio
-git clone https://github.com/TU_USUARIO/Generador-Cartera-Bitcoin.git
+git clone https://github.com/Danielk10/Generador-Cartera-Bitcoin.git
 
 # Abrir en Android Studio
 # Build > Make Project
