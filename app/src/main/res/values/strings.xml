@@ -43,8 +43,8 @@
     <string name="btn_accept">Aceptar</string>
     
     <string name="dialog_about_title">Acerca de Generador de Carteras Bitcoin</string>
-    <string name="dialog_about_msg">Generador de carteras Bitcoin seguro y offline.\n\nEsta aplicación replica exactamente la lógica criptográfica estándar de Bitcoin:\n• SHA-256 para entropía\n• ECDSA (secp256k1) para claves\n• RIPEMD-160 para direcciones\n\nVersión 2.0.0\nCódigo abierto y verificable.\n\n\"No confíes, verifica.\"\n\n%1$s</string>
+    <string name="dialog_about_msg"><b>Generador de carteras Bitcoin seguro y offline.</b><br><br>Esta aplicación replica exactamente la lógica criptográfica estándar de Bitcoin:<br>• SHA-256 para entropía<br>• ECDSA (secp256k1) para claves<br>• RIPEMD-160 para direcciones<br><br><b>Versión 2.0.0</b><br>Código abierto y verificable.<br><br><i>\"No confíes, verifica.\"</i><br><br>%1$s</string>
     
     <string name="dialog_privacy_title">Política de Privacidad</string>
-    <string name="dialog_privacy_msg">Tu privacidad es absoluta.\n\n1. 100%% Offline: Esta app no tiene permiso de internet.\n2. Sin Rastreo: No recolectamos datos, analíticas ni información personal.\n3. Efímero: Las claves se generan en la memoria RAM y se borran al cerrar la app.\n\n⚠️ IMPORTANTE SOBRE RECUPERACIÓN:\n• Puedes regenerar tu clave privada usando la MISMA semilla en esta app.\n• Si otra persona encuentra tu semilla, también puede regenerar tu clave.\n• Guarda tu semilla de forma SEGURA y PRIVADA.\n\n%1$s</string>
+    <string name="dialog_privacy_msg"><b>Tu privacidad es absoluta.</b><br><br><b>1. 100%% Offline:</b> Esta app no tiene permiso de internet.<br><br><b>2. Sin Rastreo:</b> No recolectamos datos, analíticas ni información personal.<br><br><b>3. Efímero:</b> Las claves se generan en la memoria RAM y se borran al cerrar la app.<br><br><b>⚠️ IMPORTANTE SOBRE RECUPERACIÓN:</b><br>• Puedes regenerar tu clave privada usando la MISMA semilla en esta app.<br>• Si otra persona encuentra tu semilla, también puede regenerar tu clave.<br>• Guarda tu semilla de forma SEGURA y PRIVADA.<br><br>%1$s</string>
 </resources>

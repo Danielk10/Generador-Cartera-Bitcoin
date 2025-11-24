@@ -109,23 +109,18 @@ public class MainActivity extends AppCompatActivity {
             isPrivKeyVisible = !isPrivKeyVisible;
             updateVisibility();
 
-            // Actualizar icono
-            int iconRes = isPrivKeyVisible ? R.drawable.ic_visibility_off : R.drawable.ic_visibility;
-            binding.btnToggleVisibility.setIconResource(iconRes);
-
-            // Actualizar texto
-            binding.btnToggleVisibility
-                    .setText(isPrivKeyVisible ? getString(R.string.btn_hide) : getString(R.string.btn_show));
-
-            // Aplicar/remover FLAG_SECURE
             if (isPrivKeyVisible) {
+                binding.btnToggleVisibility.setText(getString(R.string.btn_hide));
+                binding.btnToggleVisibility.setIconResource(R.drawable.ic_visibility_off);
+                // Habilitar protección contra screenshots cuando se muestran las claves
                 SecurityUtils.enableScreenshotProtection(this);
             } else {
+                binding.btnToggleVisibility.setText(getString(R.string.btn_show));
+                binding.btnToggleVisibility.setIconResource(R.drawable.ic_visibility);
+                // Deshabilitar protección cuando se ocultan
                 SecurityUtils.disableScreenshotProtection(this);
             }
         });
-
-        // Botones de copiar (se configurarán cuando haya datos)
     }
 
     /**

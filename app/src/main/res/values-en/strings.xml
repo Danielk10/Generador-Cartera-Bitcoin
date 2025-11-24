@@ -43,8 +43,8 @@
     <string name="btn_accept">Accept</string>
     
     <string name="dialog_about_title">About Bitcoin Wallet Generator</string>
-    <string name="dialog_about_msg">Secure and offline Bitcoin wallet generator.\n\nThis app replicates exactly the standard Bitcoin cryptographic logic:\n• SHA-256 for entropy\n• ECDSA (secp256k1) for keys\n• RIPEMD-160 for addresses\n\nVersion 2.0.0\nOpen source and verifiable.\n\n\"Don\'t trust, verify.\"\n\n%1$s</string>
+    <string name="dialog_about_msg"><b>Secure and offline Bitcoin wallet generator.</b><br><br>This app replicates exactly the standard Bitcoin cryptographic logic:<br>• SHA-256 for entropy<br>• ECDSA (secp256k1) for keys<br>• RIPEMD-160 for addresses<br><br><b>Version 2.0.0</b><br>Open source and verifiable.<br><br><i>\"Don\'t trust, verify.\"</i><br><br>%1$s</string>
     
     <string name="dialog_privacy_title">Privacy Policy</string>
-    <string name="dialog_privacy_msg">Your privacy is absolute.\n\n1. 100%% Offline: This app has no internet permission.\n2. No Tracking: We do not collect data, analytics, or personal information.\n3. Ephemeral: Keys are generated in RAM and cleared when the app closes.\n\n⚠️ IMPORTANT ON RECOVERY:\n• You can regenerate your private key using the SAME seed in this app.\n• If someone else finds your seed, they can also regenerate your key.\n• Keep your seed SAFE and PRIVATE.\n\n%1$s</string>
+    <string name="dialog_privacy_msg"><b>Your privacy is absolute.</b><br><br><b>1. 100%% Offline:</b> This app has no internet permission.<br><br><b>2. No Tracking:</b> We do not collect data, analytics, or personal information.<br><br><b>3. Ephemeral:</b> Keys are generated in RAM and cleared when the app closes.<br><br><b>⚠️ IMPORTANT ON RECOVERY:</b><br>• You can regenerate your private key using the SAME seed in this app.<br>• If someone else finds your seed, they can also regenerate your key.<br>• Keep your seed SAFE and PRIVATE.<br><br>%1$s</string>
 </resources>
