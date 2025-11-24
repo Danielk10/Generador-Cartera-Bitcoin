@@ -18,6 +18,7 @@ import com.diamon.ganar.databinding.ActivityMainBinding;
 import com.diamon.ganar.model.FileProcessingResult;
 import com.diamon.ganar.model.WalletData;
 import com.diamon.ganar.utils.ClipboardUtils;
+import com.diamon.ganar.utils.PantallaCompleta;
 import com.diamon.ganar.utils.SecurityUtils;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.snackbar.Snackbar;
@@ -34,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
     private MainViewModel viewModel;
+    private PantallaCompleta pantallaCompleta;
     private boolean isPrivKeyVisible = false;
 
     /**
@@ -60,6 +62,10 @@ public class MainActivity extends AppCompatActivity {
         viewModel = new ViewModelProvider(this).get(MainViewModel.class);
 
         setSupportActionBar(binding.toolbar);
+
+        pantallaCompleta = new PantallaCompleta(this);
+        pantallaCompleta.pantallaCompleta();
+        pantallaCompleta.ocultarBotonesVirtuales();
 
         setupListeners();
         setupObservers();
@@ -342,6 +348,21 @@ public class MainActivity extends AppCompatActivity {
 
         // Opcional: limpiar portapapeles
         // ClipboardUtils.clearClipboard(this);
+    }
+
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+
+        if (hasFocus) {
+            pantallaCompleta.ocultarBotonesVirtuales();
+        }
+    }
+
+    @Override
+    public boolean onKeyUp(int keyCode, android.view.KeyEvent event) {
+        pantallaCompleta.ocultarBotonesVirtuales();
+        return super.onKeyUp(keyCode, event);
     }
 
     @Override
