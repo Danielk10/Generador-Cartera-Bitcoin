@@ -1,3 +1,50 @@
+# 🪙 Generador de Cartera Bitcoin
+
+<div align="center">
+
+![Bitcoin](https://img.shields.io/badge/Bitcoin-000?style=for-the-badge&logo=bitcoin&logoColor=white)
+![Android](https://img.shields.io/badge/Android-3DDC84?style=for-the-badge&logo=android&logoColor=white)
+![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)
+![Material Design](https://img.shields.io/badge/Material%20Design-757575?style=for-the-badge&logo=material-design&logoColor=white)
+
+**Aplicación Android nativa para generar carteras Bitcoin (Legacy P2PKH) de forma segura y 100% offline**
+
+[Características](#-características) • [Instalación](#-instalación) • [Uso](#-uso) • [Seguridad](#-seguridad) • [Arquitectura](#%EF%B8%8F-arquitectura-técnica) • [Licencia](#-licencia)
+
+</div>
+
+---
+
+## 🌟 Características
+
+### 🔐 Seguridad Primero
+- **100% Offline**: Sin conexión a internet, sin servidores externos
+- **Sin Persistencia**: Las claves se generan en RAM y se destruyen al cerrar
+- **Protección de Pantalla**: FLAG_SECURE previene capturas cuando se muestran claves
+- **Código Abierto**: Auditable y verificable por cualquiera
+- **Estándares Bitcoin**: Implementación fiel de SHA-256, RIPEMD-160 y secp256k1
+
+### ⚡ Funcionalidades
+- ✅ Generación determinista desde texto o archivo
+- ✅ Soporte para imágenes, videos, documentos como semilla (límite 10 MB)
+- ✅ Compresión automática para archivos grandes (>1 MB)
+- ✅ Visualización de Private Key (Hex), WIF, Public Key y Address
+- ✅ Ocultación de claves privadas por defecto
+- ✅ **Botones de copiar** para cada campo con confirmación para datos sensibles
+- ✅ **Protección de pantalla** (FLAG_SECURE) al mostrar claves privadas
+- ✅ Compatible con Electrum y otras wallets estándar
+
+### 🎨 Diseño Moderno
+- Material Design 3 (Material You)
+- Tema Bitcoin con colores naranja/dorado
+- Interfaz intuitiva y profesional
+- Feedback visual con Snackbars
+- Soporte para modo claro/oscuro
+
+---
+
+## 📱 Instalación
+
 ### Requisitos
 - Android 6.0 (API 23) o superior
 - ~5 MB de espacio libre
