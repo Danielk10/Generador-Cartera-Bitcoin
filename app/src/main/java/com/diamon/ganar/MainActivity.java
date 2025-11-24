@@ -298,7 +298,7 @@ public class MainActivity extends AppCompatActivity {
                 .setTitle(getString(R.string.dialog_about_title))
                 .setIcon(R.drawable.ic_btc_shield)
                 .setMessage(spanned)
-                .setPositiveButton("Entendido", null)
+                .setPositiveButton(getString(R.string.btn_understood), null)
                 .create();
 
         dialog.show();
@@ -321,7 +321,7 @@ public class MainActivity extends AppCompatActivity {
                 .setTitle(getString(R.string.dialog_privacy_title))
                 .setIcon(R.drawable.ic_btc_shield)
                 .setMessage(spanned)
-                .setPositiveButton("Aceptar", null)
+                .setPositiveButton(getString(R.string.btn_accept), null)
                 .create();
 
         dialog.show();
