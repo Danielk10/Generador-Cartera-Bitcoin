@@ -43,8 +43,8 @@
     <string name="btn_accept">Accept</string>
     
     <string name="dialog_about_title">About Bitcoin Wallet Generator</string>
-    <string name="dialog_about_msg"><b>Secure and offline Bitcoin wallet generator.</b><br><br>This app replicates exactly the standard Bitcoin cryptographic logic:<br>• SHA-256 for entropy<br>• ECDSA (secp256k1) for keys<br>• RIPEMD-160 for addresses<br><br><b>Version 2.0.0</b><br>Open source and verifiable.<br><br><i>\"Don\'t trust, verify.\"</i><br><br>%1$s</string>
+    <string name="dialog_about_msg"><b>Secure and offline Bitcoin wallet generator.</b><br/><br/>This app replicates exactly the standard Bitcoin cryptographic logic:<br/>• SHA-256 for entropy<br/>• ECDSA (secp256k1) for keys<br/>• RIPEMD-160 for addresses<br/><br/><b>Version 2.0.0</b><br/>Open source and verifiable.<br/><br/><i>\"Don\'t trust, verify.\"</i><br/><br/>%1$s</string>
     
     <string name="dialog_privacy_title">Privacy Policy</string>
-    <string name="dialog_privacy_msg"><b>Your privacy is absolute.</b><br><br><b>1. 100%% Offline:</b> This app has no internet permission.<br><br><b>2. No Tracking:</b> We do not collect data, analytics, or personal information.<br><br><b>3. Ephemeral:</b> Keys are generated in RAM and cleared when the app closes.<br><br><b>⚠️ IMPORTANT ON RECOVERY:</b><br>• You can regenerate your private key using the SAME seed in this app.<br>• If someone else finds your seed, they can also regenerate your key.<br>• Keep your seed SAFE and PRIVATE.<br><br>%1$s</string>
+    <string name="dialog_privacy_msg"><b>Your privacy is absolute.</b><br/><br/><b>1. 100%% Offline:</b> This app has no internet permission.<br/><br/><b>2. No Tracking:</b> We do not collect data, analytics, or personal information.<br/><br/><b>3. Ephemeral:</b> Keys are generated in RAM and cleared when the app closes.<br/><br/><b>⚠️ IMPORTANT ON RECOVERY:</b><br/>• You can regenerate your private key using the SAME seed in this app.<br/>• If someone else finds your seed, they can also regenerate your key.<br/>• Keep your seed SAFE and PRIVATE.<br/><br/>%1$s</string>
 </resources>
