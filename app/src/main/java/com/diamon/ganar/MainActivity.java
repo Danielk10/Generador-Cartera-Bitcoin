@@ -327,6 +327,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        // Sincronizar protección de pantalla con la visibilidad de claves
+        if (isPrivKeyVisible) {
+            SecurityUtils.enableScreenshotProtection(this);
+        } else {
+            SecurityUtils.disableScreenshotProtection(this);
+        }
+    }
+
+    @Override
     protected void onPause() {
         super.onPause();
 
@@ -336,10 +347,10 @@ public class MainActivity extends AppCompatActivity {
             updateVisibility();
             binding.btnToggleVisibility.setText(getString(R.string.btn_show));
             binding.btnToggleVisibility.setIconResource(R.drawable.ic_visibility);
-        }
 
-        // Remover FLAG_SECURE
-        SecurityUtils.disableScreenshotProtection(this);
+            // NOTA: No desactivamos FLAG_SECURE aquí para que la vista previa
+            // en el selector de tareas (Recents) aparezca protegida (negra/blanca).
+        }
 
         // Opcional: limpiar portapapeles
         // ClipboardUtils.clearClipboard(this);
