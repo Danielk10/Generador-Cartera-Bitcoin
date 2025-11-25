@@ -48,20 +48,6 @@ public class MainActivity extends AppCompatActivity {
                     Uri uri = result.getData().getData();
                     if (uri != null) {
                         viewModel.generateFromFile(uri);
-                    }
-                }
-            });
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
-
-        viewModel = new ViewModelProvider(this).get(MainViewModel.class);
-
-        setSupportActionBar(binding.toolbar);
 
         pantallaCompleta = new PantallaCompleta(this);
         pantallaCompleta.pantallaCompleta();
@@ -78,50 +64,33 @@ public class MainActivity extends AppCompatActivity {
         // Botón generar desde texto
         binding.btnGenerate.setOnClickListener(v -> {
             binding.inputSeed.setEnabled(true);
-            String seed = binding.inputSeed.getText().toString();
+    String seed = binding.inputSeed.getText().toString();
 
-            if (seed.isEmpty()) {
-                Snackbar.make(binding.getRoot(), getString(R.string.msg_enter_seed), Snackbar.LENGTH_SHORT).show();
-                return;
-            }
-
-            viewModel.generateFromText(seed);
-        });
-
-        // Botón cargar archivo
-        binding.btnLoadFile.setOnClickListener(v -> {
-            Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
-            intent.addCategory(Intent.CATEGORY_OPENABLE);
-            intent.setType("*/*");
-            filePickerLauncher.launch(intent);
-        });
-
-        // Botón limpiar
-        binding.btnClear.setOnClickListener(v -> {
-            binding.inputSeed.setText("");
-            binding.inputSeed.setEnabled(true);
-            clearResults();
-            viewModel.clearWalletData();
-        });
-
-        // Botón toggle visibilidad
-        binding.btnToggleVisibility.setOnClickListener(v -> {
-            isPrivKeyVisible = !isPrivKeyVisible;
-            updateVisibility();
-
-            if (isPrivKeyVisible) {
-                binding.btnToggleVisibility.setText(getString(R.string.btn_hide));
-                binding.btnToggleVisibility.setIconResource(R.drawable.ic_visibility_off);
-                // Habilitar protección contra screenshots cuando se muestran las claves
-                SecurityUtils.enableScreenshotProtection(this);
-            } else {
-                binding.btnToggleVisibility.setText(getString(R.string.btn_show));
-                binding.btnToggleVisibility.setIconResource(R.drawable.ic_visibility);
-                // Deshabilitar protección cuando se ocultan
-                SecurityUtils.disableScreenshotProtection(this);
-            }
-        });
+    if(seed.isEmpty())
+    {
+        Snackbar.make(binding.getRoot(), getString(R.string.msg_enter_seed), Snackbar.LENGTH_SHORT).show();
+        return;
     }
+
+    viewModel.generateFromText(seed);});
+
+    // Botón cargar archivo
+    binding.btnLoadFile.setOnClickListener(v->{
+    Intent intent = new Intent(
+            Intent.ACTION_OPEN_DOCUMENT);intent.addCategory(Intent.CATEGORY_OPENABLE);intent.setType("*/*");filePickerLauncher.launch(intent);
+    });
+
+    // Botón limpiar
+    binding.btnClear.setOnClickListener(v->{binding.inputSeed.setText("");binding.inputSeed.setEnabled(true);clearResults();viewModel.clearWalletData();});
+
+    // Botón toggle visibilidad
+    binding.btnToggleVisibility.setOnClickListener(v->{isPrivKeyVisible=!isPrivKeyVisible;updateVisibility();
+
+    if(isPrivKeyVisible){binding.btnToggleVisibility.setText(getString(R.string.btn_hide));binding.btnToggleVisibility.setIconResource(R.drawable.ic_visibility_off);
+    // Habilitar protección contra screenshots cuando se muestran las claves
+    SecurityUtils.enableScreenshotProtection(this);}else{binding.btnToggleVisibility.setText(getString(R.string.btn_show));binding.btnToggleVisibility.setIconResource(R.drawable.ic_visibility);
+    // Deshabilitar protección cuando se ocultan
+    SecurityUtils.disableScreenshotProtection(this);}});}
 
     /**
      * Configura observadores de LiveData del ViewModel.

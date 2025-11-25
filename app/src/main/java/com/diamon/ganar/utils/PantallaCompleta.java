@@ -1,10 +1,9 @@
 package com.diamon.ganar.utils;
 
-import android.os.Build;
-import android.view.View;
-import android.view.WindowManager;
-
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.WindowCompat;
+import androidx.core.view.WindowInsetsCompat;
+import androidx.core.view.WindowInsetsControllerCompat;
 
 /**
  * Utilidad para gestionar el modo de pantalla completa e inmersivo en Android.
@@ -32,11 +31,10 @@ public class PantallaCompleta {
      * Coloca la actividad en modo pantalla completa ocultando la barra de estado.
      */
     public void pantallaCompleta() {
-        actividad
-                .getWindow()
-                .setFlags(
-                        WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                        WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        // Con Edge-to-Edge habilitado, esto se maneja principalmente ocultando los
+        // insets
+        // pero mantenemos el método para compatibilidad con la estructura existente.
+        ocultarBotonesVirtuales();
     }
 
     /**
@@ -46,17 +44,16 @@ public class PantallaCompleta {
      * después de unos segundos.
      */
     public void ocultarBotonesVirtuales() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            actividad
-                    .getWindow()
-                    .getDecorView()
-                    .setSystemUiVisibility(
-                            View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                                    | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                                    | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                                    | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
-                                    | View.SYSTEM_UI_FLAG_FULLSCREEN
-                                    | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
+        WindowInsetsControllerCompat windowInsetsController = WindowCompat.getInsetsController(actividad.getWindow(),
+                actividad.getWindow().getDecorView());
+
+        if (windowInsetsController != null) {
+            // Configurar el comportamiento de los insets del sistema
+            windowInsetsController.setSystemBarsBehavior(
+                    WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE);
+
+            // Ocultar las barras del sistema (estado y navegación)
+            windowInsetsController.hide(WindowInsetsCompat.Type.systemBars());
         }
     }
 }

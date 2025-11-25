@@ -10,8 +10,6 @@
         <item name="colorSecondaryVariant">@color/black</item>
         <item name="colorOnSecondary">@color/white</item>
         
-        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
-        
         <!-- Material 3 specific -->
         <item name="materialButtonStyle">@style/Widget.Material3.Button</item>
     </style>
