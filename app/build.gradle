@@ -5,17 +5,15 @@ plugins {
 android {
     namespace 'com.diamon.ganar'
     compileSdk {
-       version = release(36)
+       version = release(37)
     }
-    
-    //compileSdk 36
 
     defaultConfig {
         applicationId "com.diamon.ganar"
         minSdk 23
-        targetSdk 36
-        versionCode 28
-        versionName "2.0.1"
+        targetSdk 37
+        versionCode 29
+        versionName "2.0.2"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
