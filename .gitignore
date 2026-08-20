@@ -1,7 +1,9 @@
 *.iml
 .gradle
-.vscode
-.acside
+.androidide/
+.idea/
+.vscode/
+.acside/
 /local.properties
 /.idea/caches
 /.idea/libraries
@@ -15,3 +17,20 @@
 .externalNativeBuild
 .cxx
 local.properties
+
+# Keystore files
+*.jks
+*.keystore
+keystore.jks
+keystore.properties
+
+*.json
+
+*.apk
+*.aab
+output-metadata.json
+*.log
+*.hprof
+misc.xml
+deploymentTargetDropDown.xml
+render.experimental.xml

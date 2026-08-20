@@ -2,14 +2,15 @@
 
 <div align="center">
 
-![Bitcoin](https://img.shields.io/badge/Bitcoin-000?style=for-the-badge&logo=bitcoin&logoColor=white)
-![Android](https://img.shields.io/badge/Android-3DDC84?style=for-the-badge&logo=android&logoColor=white)
-![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)
-![Material Design](https://img.shields.io/badge/Material%20Design-757575?style=for-the-badge&logo=material-design&logoColor=white)
+[![Android](https://img.shields.io/badge/Android-6.0%20(API%2023)%20a%20Android%2017%20(API%2037)-3DDC84?logo=android&logoColor=white)](https://developer.android.com/)
+[![Target SDK](https://img.shields.io/badge/Target%20SDK-API%2037%20(Android%2017)-3DDC84?logo=android&logoColor=white)](https://developer.android.com/)
+[![AGP](https://img.shields.io/badge/AGP-9.2.1-blue?logo=android)](https://developer.android.com/studio/releases/gradle-plugin)
+[![Gradle](https://img.shields.io/badge/Gradle-9.6.0-02303A?logo=gradle&logoColor=white)](https://gradle.org/)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](./LICENSE.txt)
 
 **Aplicación Android nativa para generar carteras Bitcoin (Legacy P2PKH) de forma segura y 100% offline**
 
-[Características](#-características) • [Instalación](#-instalación) • [Uso](#-uso) • [Seguridad](#-seguridad) • [Arquitectura](#%EF%B8%8F-arquitectura-técnica) • [Licencia](#-licencia)
+[Características](#-características) • [Compilación](#-compilación-y-ejecución) • [Uso](#-uso) • [Seguridad](#-seguridad) • [Arquitectura](#%EF%B8%8F-arquitectura-técnica) • [Licencia](#-licencia)
 
 </div>
 
@@ -40,25 +41,31 @@
 - Interfaz intuitiva y profesional
 - Feedback visual con Snackbars
 - Soporte para modo claro/oscuro
+- Compatible con Android 6.0 (API 23) a Android 17 (API 37)
 
 ---
 
-## 📱 Instalación
+## 🚀 Compilación y Ejecución
 
-### Requisitos
-- Android 6.0 (API 23) o superior
-- ~5 MB de espacio libre
+### Especificaciones Técnicas
+- **Android SDK:** Compile SDK 37 / Target SDK 37 / Min SDK 23
+- **Android Build Tools:** 37.0.0
+- **Android Gradle Plugin (AGP):** 9.2.1
+- **Gradle:** 9.6.0 (Gradle Wrapper)
+- **Firma Release:** Configurada vía `keystore.properties` (y variables de entorno para CI/CD).
+- **Ruta de compilación:** Redirigida a `/tmp/calculo` para mantener limpio el entorno.
 
-### Desde el Código Fuente
-
+### Preparación del SDK:
 ```bash
-# Clonar el repositorio
-git clone https://github.com/Danielk10/Generador-Cartera-Bitcoin.git
-
-# Abrir en Android Studio
-# Build > Make Project
-# Run > Run 'app'
+bash setup-sdk.sh
 ```
+
+### Comandos de Compilación:
+- **APK Debug:** `./gradlew assembleDebug` (Salida: `/tmp/calculo/outputs/apk/debug/app-debug.apk`)
+- **APK Release firmado:** `./gradlew assembleRelease` (Salida: `/tmp/calculo/outputs/apk/release/app-release.apk`)
+- **AAB Release firmado (Play Store):** `./gradlew bundleRelease` (Salida: `/tmp/calculo/outputs/bundle/release/app-release.aab`)
+
+Consulta [GEMINI.md](GEMINI.md) y [GUIA_PUBLICACION_PLAY_STORE.md](GUIA_PUBLICACION_PLAY_STORE.md) para más detalles.
 
 ---
 
